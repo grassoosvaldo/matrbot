@@ -21,8 +21,8 @@ def main(argv):
         opts, args = getopt.getopt(argv, "s:x:h:c:p:k:e:r:",
                                    ["server=", "port=", "ca_certs=", "certfile=", "keyfile=", "execute_topic=",
                                     "response_topic="])
-    except getopt.GetoptError, e:
-        print 'publisher.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>'
+    except getopt.GetoptError as e:
+        print 'asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>'
         print "[*]", e
         sys.exit(2)
     for opt, arg in opts:
