@@ -22,12 +22,12 @@ def main(argv):
                                    ["server=", "port=", "ca_certs=", "certfile=", "keyfile=", "execute_topic=",
                                     "response_topic="])
     except getopt.GetoptError as e:
-        print "asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>"
-        print "[*]", e
+        print ("asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>")
+        print ("[*]", e)
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print 'publisher.py -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>'
+            print ('publisher.py -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>')
             sys.exit()
         elif opt in ("-s", "--server"):
             server = arg
@@ -44,7 +44,7 @@ def main(argv):
         elif opt in ("-r", "--response_topic"):
             responseTopic = arg
 
-    print ca_certs, certfile, keyfile, execute_topic, response_top
+    print (ca_certs, certfile, keyfile, execute_topic, response_topic)
 
 
 def on_connect(client, userdata, flags, rc):
@@ -141,7 +141,7 @@ if __name__ == "__main__":
             cert_required = ssl.CERT_NONE
             certfile = None
             keyfile = None
-        print tlsVersion
+        print (tlsVersion)
         mqttc.tls_set(ca_certs=args.cacerts, certfile=certfile, keyfile=keyfile, cert_reqs=cert_required,
                       tls_version=tlsVersion)
 
