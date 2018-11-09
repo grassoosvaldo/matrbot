@@ -12,6 +12,8 @@ from robot import handler
 
 app = Flask(__name__)
 handler.setup()
+#asyncmsg.setup()
+
 
 @app.route('/handler', methods=['POST'])
 def handle():
