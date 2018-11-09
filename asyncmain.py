@@ -11,40 +11,7 @@ execute_topic = ""
 response_topic = ""
 mqttc = None
 
-relay1_state = False
-relay2_state = False
-relay3_state = False
-
-
-def main(argv):
-    try:
-        opts, args = getopt.getopt(argv, "s:x:h:c:p:k:e:r:",
-                                   ["server=", "port=", "ca_certs=", "certfile=", "keyfile=", "execute_topic=",
-                                    "response_topic="])
-    except getopt.GetoptError as e:
-        print ("asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>")
-        print ("[*]", e)
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print ('publisher.py -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>')
-            sys.exit()
-        elif opt in ("-s", "--server"):
-            server = arg
-        elif opt in ("-x", "--port"):
-            port = int(arg)
-        elif opt in ("-c", "--ca"):
-            ca_certs = arg
-        elif opt in ("-p", "--pem"):
-            certfile = arg
-        elif opt in ("-k", "--key"):
-            keyfile = arg
-        elif opt in ("-e", "--execute_topic"):
-            execute_topic = arg
-        elif opt in ("-r", "--response_topic"):
-            responseTopic = arg
-
-    print (ca_certs, certfile, keyfile, execute_topic, response_topic)
+asynchandler.configure_io()
 
 
 def on_connect(client, userdata, flags, rc):
@@ -80,7 +47,7 @@ def on_subscribe(mqttc, obj, mid, granted_qos):
 
 
 if __name__ == "__main__":
-    relay1_state = not relay1_state
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-H', '--host', required=False, default="m2m.eclipse.org")
     parser.add_argument('-e', '--execute_topic', required=False, default="raspberry/commands",
@@ -164,6 +131,8 @@ if __name__ == "__main__":
 
     mqttc.loop_forever()
 
+def app_shutdown():
+    handler.terminate()
 
 # EJEMPLO CMD
 # python rf.py -s "a2sq3y7mdrjtom.iot.us-west-2.amazonaws.com" -x 8883 -c "./rootCA.pem" -p "./pythonClient.certificate.pem" -k "./pythonClient.private-key.txt" -e "70feba2e" -r "56a40261"
