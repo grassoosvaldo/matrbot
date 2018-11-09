@@ -8,7 +8,7 @@ import time
 from multiprocessing import Process
 
 from apscheduler.scheduler import Scheduler
-import asyncmsg
+# import asyncmsg
 
 left_wheel_pins = [6,13,19,26] #constants for wheel1
 right_wheel_pins= [4,17,27,22] #constants for wheel2
@@ -33,12 +33,12 @@ wheel_sequence = [[1,0,0,1], #sequence for wheels
 
 def configure_io():
     outputs = left_wheel_pins + right_wheel_pins + [sensor_trig]
-    print "configuring outputs %s" % outputs
+    print("configuring outputs %s" % outputs)
     GPIO.setmode(GPIO.BCM)
     for pin in outputs:
         GPIO.setup(pin,GPIO.OUT)
         GPIO.output(pin,False)
-    print "configuring inputs for sensor"
+    print("configuring inputs for sensor" )
     #GPIO.setup(sensor_trig, GPIO.OUT)
     GPIO.setup(sensor_echo, GPIO.IN)
 	
@@ -122,9 +122,9 @@ def setStep(pinList, status):
 
 
 def setup():
-    print "creating new matrbot facade"
+    print ("creating new matrbot facade")
     configure_io()
-    print "showing message:"
+    print ("showing message:")
     LCD1602.init(0x27, 1)
     LCD1602.write(0,0,"Hello im MATRBOT")
     LCD1602.write(0,1,"IP : no ip yet!")
@@ -145,10 +145,10 @@ def updateIp():
             		LCD1602.write(0, 1, "IP:"+current_ip)
 			break
         except:
-		print "error getting ip ,retrying in 5 seconds"
+		print("error getting ip ,retrying in 5 seconds")
 		pass	
 	time.sleep(5)
-    print "ip scan process finished"
+    print ("ip scan process finished")
 	
 
 p = Process(target=updateIp)
@@ -156,17 +156,17 @@ p = Process(target=updateIp)
 def configureScheduler():
     
     sched.start()
-    print "starting scheduler"
+    print ("starting scheduler")
     
     sched.add_interval_job(read_sensor_state,seconds(10))
     
     
 
 def terminate():
-   print "terminating matrbot interface"
+   print ("terminating matrbot interface")
    LCD1602.clear()
    GPIO.cleanup()
    p.terminate()
    p.join()
    sched.shutdown();
-   print "bye!"
+   print ("bye!")

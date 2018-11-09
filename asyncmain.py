@@ -22,7 +22,7 @@ def main(argv):
                                    ["server=", "port=", "ca_certs=", "certfile=", "keyfile=", "execute_topic=",
                                     "response_topic="])
     except getopt.GetoptError as e:
-        print 'asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>'
+        print "asyncmain.py -s <server> -p <port> -c <ca_certs> -p <certfile> -k <keyfile> -e <execute_topic> -r <response_topic>"
         print "[*]", e
         sys.exit(2)
     for opt, arg in opts:
@@ -44,7 +44,7 @@ def main(argv):
         elif opt in ("-r", "--response_topic"):
             responseTopic = arg
 
-    print ca_certs, certfile, keyfile, execute_topic, response_topic
+    print ca_certs, certfile, keyfile, execute_topic, response_top
 
 
 def on_connect(client, userdata, flags, rc):

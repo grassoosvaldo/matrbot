@@ -20,12 +20,12 @@ wheel_sequence = [[1,0,0,1], #sequence for wheels
 
 def configure_io():
     outputs = left_wheel_pins + right_wheel_pins
-    print "configuring outputs %s" % outputs
+    print ("configuring outputs %s" % outputs)
     GPIO.setmode(GPIO.BCM)
     for pin in outputs:
         GPIO.setup(pin,GPIO.OUT)
         GPIO.output(pin,False)
-    print "configuring inputs for sensor"
+    print ("configuring inputs for sensor")
     #GPIO.setup(sensor_trig, GPIO.OUT)
     #GPIO.setup(sensor_echo, GPIO.IN)
     
@@ -87,5 +87,5 @@ def read_sensors():
 
 
 def terminate():
-   print "terminating matrbot interface"
+   print ("terminating matrbot interface")
    GPIO.cleanup()
