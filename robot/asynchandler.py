@@ -2,10 +2,11 @@
 import sys
 import RPi.GPIO as GPIO
 import time
-import status
+#import status
 
-left_wheel_pins = [6,13,19,26] #constants for wheel1
-right_wheel_pins= [4,17,27,22] #constants for wheel2
+#left_wheel_pins = [6,13,19,26] #constants for wheel1
+left_wheel_pins = [4,17,27,22] #constants for wheel1
+right_wheel_pins= [5,16,28,22] #constants for wheel2
 step_delay = 3.0 / 1000 ##delay for step
 
 step_count = 8
